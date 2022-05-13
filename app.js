@@ -9,6 +9,7 @@ const db = require('./db/mongo-db');
 const { Limits } = require('./config/limits');
 const HttpCodes = require('./helpers/http-codes');
 const Ports = require('./helpers/ports');
+const transactionsRoutes = require('./router/transactions-routes');
 
 const PORT = process.env.PORT || Ports.DEFAULT;
 
@@ -19,6 +20,8 @@ app.use(cors());
 app.use(express.json({ limit: Limits.JSON }));
 app.use(boolParser());
 app.use(cookieParser());
+
+app.use(transactionsRoutes);
 
 // 404 Not found
 app.use((req, res) => {
