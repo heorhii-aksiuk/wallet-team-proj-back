@@ -1,0 +1,232 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "version": "1.0.0",
+      "title": "Swagger end-point routes",
+      "description": "Showing off swagger-ui-express",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "servers": [{ "url": "http://localhost:3000" }],
+    "tags": [
+      {
+        "name": "Auth",
+        "description": "Authorization endpoints"
+      }
+    ],
+
+    "paths": {
+      "/auth/register": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "User registration",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+          
+          "requestBody": {
+            "description": "Registration's object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/RegistrationResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid request body)",
+              "content": {}
+            },
+            "409": {
+              "description": "Provided email already exists",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "User registration",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+          
+          "requestBody": {
+            "description": "Login`s object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/LoginResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid request body)",
+              "content": {}
+            },
+            "409": {
+              "description": "Provided email already exists",
+              "content": {}
+            }
+          }
+        }
+      },
+    "/auth/logout": {
+        "post": {
+          "tags": ["Auth"],
+          "summary": "User logout",
+
+          "parameters": [],
+          "security": [{ "Bearer": [] }],
+          
+          "requestBody": {
+            "description": "Logout`s object",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/LogoutResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request (invalid request body)",
+              "content": {}
+            }
+          }
+        }
+      }
+    },
+
+    "components": {
+      "schemas": {
+        "RegistrationRequest": {
+          "type": "object",
+          "required": ["email", "password"],
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "password": {
+              "type": "string",
+              "description": "User's password",
+              "example": "qwerty123"
+            }
+          }
+        },
+        "RegistrationResponse": {
+          "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "userId": {
+                "type": "integer",
+                "description": "User's id",
+                "example": "32143232436545474"
+              }
+            }
+          },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "email": "user@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "zxcv1234"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "userId": {
+              "type": "integer",
+              "description": "User's id",
+              "example": "zuidhgeui8128329ksjd"
+            }
+          }
+        },
+    "LogoutRequest": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+            "userId": {
+                "type": "integer",
+                "description": "User's id",
+                "example": "zuidhgeui8128329ksjd"
+              }
+            }
+        },
+        "LogoutResponse": {
+        "type": "string",
+        "description": "User logout!"
+        }
+    },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }

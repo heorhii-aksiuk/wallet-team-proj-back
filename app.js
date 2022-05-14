@@ -4,6 +4,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const boolParser = require('express-query-boolean');
 const cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const db = require('./db/mongo-db');
 const { Limits } = require('./config/limits');
@@ -19,6 +21,9 @@ app.use(cors());
 app.use(express.json({ limit: Limits.JSON }));
 app.use(boolParser());
 app.use(cookieParser());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 // 404 Not found
 app.use((req, res) => {
