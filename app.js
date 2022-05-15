@@ -1,29 +1,33 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const boolParser = require('express-query-boolean');
-const cookieParser = require('cookie-parser');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const helmet = require('helmet')
+const boolParser = require('express-query-boolean')
+const cookieParser = require('cookie-parser')
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json')
 
-const db = require('./db/mongo-db');
-const { Limits } = require('./config/limits');
-const HttpCodes = require('./helpers/http-codes');
-const Ports = require('./helpers/ports');
+const db = require('./db/mongo-db')
+const { Limits } = require('./config/limits')
+const HttpCodes = require('./helpers/http-codes')
+const Ports = require('./helpers/ports')
 
-const PORT = process.env.PORT || Ports.DEFAULT;
+const categoriesRoutes = require('./router/categories-routes')
+const transactionsRoutes = require('./router/transactions-routes')
 
-const app = express();
+const PORT = process.env.PORT || Ports.DEFAULT
 
-app.use(helmet());
-app.use(cors());
-app.use(express.json({ limit: Limits.JSON }));
-app.use(boolParser());
-app.use(cookieParser());
+const app = express()
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(helmet())
+app.use(cors())
+app.use(express.json({ limit: Limits.JSON }))
+app.use(boolParser())
+app.use(cookieParser())
 
+app.use(categoriesRoutes)
+app.use(transactionsRoutes)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // 404 Not found
 app.use((req, res) => {
@@ -31,33 +35,33 @@ app.use((req, res) => {
     status: 'error',
     code: HttpCodes.NOT_FOUND,
     message: 'Not Found.',
-  });
-});
+  })
+})
 
 // Central errors handling
 app.use((err, req, res, next) => {
-  const statusCode = err.status || HttpCodes.INTERNAL_SERVER_ERROR;
+  const statusCode = err.status || HttpCodes.INTERNAL_SERVER_ERROR
 
   res.status(statusCode).json({
     status: statusCode === HttpCodes.INTERNAL_SERVER_ERROR ? 'fail' : 'error',
     code: statusCode,
     message: err.message,
-  });
-});
+  })
+})
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
-});
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason)
+})
 
 const startServer = async () => {
   try {
-    await db;
-    app.listen(PORT, () => console.log('Server running on port: ', PORT));
+    await db
+    app.listen(PORT, () => console.log('Server running on port: ', PORT))
   } catch (error) {
-    console.log('Error in startServer: ', error.message);
+    console.log('Error in startServer: ', error.message)
   }
-};
+}
 
-startServer();
+startServer()
 
-module.exports = app;
+module.exports = app
