@@ -185,10 +185,53 @@
     },
     "/transactions": {
       "post": {
-        "tags": ["Transactions"]
+        "tags": ["Transactions"],
+        "summary": "Creating a new transaction",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Create transaction request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createTransactionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createTransactionSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request response" }
+        }
       },
       "get": {
-        "tags": ["Transactions"]
+        "tags": ["Transactions"],
+        "summary": "Getting all transactions of a user",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTransactionsSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request response" }
+        }
       }
     }
   },
@@ -271,6 +314,220 @@
       "LogoutResponse": {
         "type": "string",
         "description": "User logout!"
+      },
+      "createTransactionRequest": {
+        "type": "object",
+        "required": ["date", "income", "category", "sum"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Transaction's date",
+            "example": "2022-05-16"
+          },
+          "income": {
+            "type": "boolean",
+            "description": "Is transaction income",
+            "example": false
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of transaction",
+            "example": "Основные расходы"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User's comment",
+            "example": "Еда"
+          },
+          "sum": {
+            "type": "integer",
+            "description": "Sum of transaction",
+            "example": 150
+          }
+        }
+      },
+      "createTransactionSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "object",
+            "description": "Information about created transaction",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Transaction ID",
+                "example": "70e3fcb6e0601939c9016537"
+              },
+              "date": {
+                "type": "string",
+                "description": "Transaction's date",
+                "example": "2022-05-16"
+              },
+              "income": {
+                "type": "boolean",
+                "description": "Is transaction income",
+                "example": false
+              },
+              "category": {
+                "type": "string",
+                "description": "Category of transaction",
+                "example": "Продукты"
+              },
+              "comment": {
+                "type": "string",
+                "description": "User's comment",
+                "example": "Продукты на неделю"
+              },
+              "sum": {
+                "type": "integer",
+                "description": "Sum of transaction",
+                "example": 500
+              },
+              "createdAt": {
+                "type": "string",
+                "description": "Date of entry creation",
+                "example": "2022-05-16T15:33:04.595Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "description": "Date of entry update",
+                "example": "2022-05-16T15:33:04.595Z"
+              }
+            }
+          }
+        }
+      },
+      "getTransactionsSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "object",
+            "description": "Information about transactions and balance totals",
+            "properties": {
+              "allTransactions": {
+                "type": "array",
+                "description": "Array of transactions objects",
+                "items": {
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Transaction ID",
+                      "example": "70e3fcb6e0601939c9016537"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Category of transaction",
+                      "example": "Регулярный доход"
+                    },
+                    "income": {
+                      "type": "boolean",
+                      "description": "Is category an income",
+                      "example": true
+                    },
+                    "date": {
+                      "type": "string",
+                      "description": "Date indicated by the user",
+                      "example": "2022-05-15T12:00:00.000Z"
+                    },
+                    "comment": {
+                      "type": "string",
+                      "description": "Comment for the transaction",
+                      "example": "Зарплата за апрель"
+                    },
+                    "sum": {
+                      "type": "integer",
+                      "description": "Amount of the transaction",
+                      "example": 5000
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "Date of entry creation",
+                      "example": "2022-05-15T11:24:43.593Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "Date of entry update",
+                      "example": "2022-05-15T11:24:43.593Z"
+                    }
+                  }
+                }
+              },
+              "totals": {
+                "type": "object",
+                "properties": {
+                  "income": {
+                    "type": "integer",
+                    "description": "Amount of total income",
+                    "example": 5000
+                  },
+                  "expense": {
+                    "type": "integer",
+                    "description": "Amount of total expenses",
+                    "example": 500
+                  },
+                  "balance": {
+                    "type": "integer",
+                    "description": "Amount of total current balance",
+                    "example": 4500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "allTransactions": [
+              {
+                "id": "70e3fcb6e0601939c9016537",
+                "category": "Регулярный доход",
+                "income": true,
+                "date": "2022-05-15T12:00:00.000Z",
+                "comment": "Зарплата за апрель",
+                "sum": 5000,
+                "createdAt": "2022-05-15T11:24:43.593Z",
+                "updatedAt": "2022-05-15T11:24:43.593Z"
+              },
+              {
+                "id": "50e3fch5e0104935c9016537",
+                "category": "Основные расходы",
+                "income": false,
+                "date": "2022-05-15T12:00:00.000Z",
+                "comment": "Еда",
+                "sum": 500,
+                "createdAt": "2022-05-15T11:24:43.593Z",
+                "updatedAt": "2022-05-15T11:24:43.593Z"
+              }
+            ],
+            "totals": {
+              "income": 5000,
+              "expense": 500,
+              "balance": 4500
+            }
+          }
+        }
       }
     },
 
