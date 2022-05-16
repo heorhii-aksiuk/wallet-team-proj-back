@@ -11,6 +11,7 @@ const db = require('./db/mongo-db');
 const { Limits } = require('./config/limits');
 const HttpCodes = require('./helpers/http-codes');
 const Ports = require('./helpers/ports');
+const authRouter = require('./routes/api/auth')
 
 const PORT = process.env.PORT || Ports.DEFAULT;
 
@@ -22,6 +23,7 @@ app.use(express.json({ limit: Limits.JSON }));
 app.use(boolParser());
 app.use(cookieParser());
 
+app.use('/api/auth', authRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
