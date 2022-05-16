@@ -1,4 +1,4 @@
-const {HttpCodes} = require('../helpers/http-codes')
+const HttpCodes = require('../helpers/http-codes')
 
 const wrapper = (fn) => async (req, res, next) => {
     try {

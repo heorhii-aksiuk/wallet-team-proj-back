@@ -1,5 +1,5 @@
 const authService = require('../services/auth')
-const {HttpCodes} = require('../helpers/http-codes')
+const HttpCodes = require('../helpers/http-codes')
 
 const registration = async (req, res) => {
     const user = await authService.create(req.body)

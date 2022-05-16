@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 const bcrypt = require('bcryptjs')
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 
 const { Schema, model } = mongoose;
 
@@ -14,10 +14,10 @@ const userSchema = new Schema({
           type: String,
           required: [true, 'Password is required'],
         },
-        // repeatPassword: {
-        //     type: String,
-        //     required: [true, 'Password must be repeate'],
-        //   },
+        repeatPassword: {
+            type: String,
+            required: [true, 'Password must be repeate'],
+          },
         email: {
           type: String,
           required: [true, 'Email is required'],
@@ -30,15 +30,15 @@ const userSchema = new Schema({
         cloudId:{
           type: String,
           default: null
-        },
-        isVerify:{
-          type: Boolean,
-          default: false
-        },
-        verifyEmailToken:{
-          type: String,
-          default: uuidv4()
         }
+        // isVerify:{
+        //   type: Boolean,
+        //   default: false
+        // },
+        // verifyEmailToken:{
+        //   type: String,
+        //   default: uuidv4()
+        // }
       },
 {
         versionKey: false,

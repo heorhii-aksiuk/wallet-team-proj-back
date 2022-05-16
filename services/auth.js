@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const Users = require ('../repository/user')
-const {HttpCodes} = require('../helpers/http-codes')
-const CustomError = require('../middlewares/custom-error')
+const HttpCodes = require('../helpers/http-codes')
+const {CustomError} = require('../middlewares/custom-error')
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY
 
@@ -17,14 +17,15 @@ class authService {
         return {
             id: newUser.id,
             name: newUser.name,
-            email: newUser.email,
-            role: newUser.role,
-            avatar: newUser.avatar
+            email: newUser.email
         }
     }
 
     async login ({ email, password }) {
         const user = await this.getUser(email, password)
+        if (!user) {
+            throw new CustomError (HttpCodes.UNAUTHORIZED, 'Invalid user')
+        }
         const token = this.generateToken(user)
         await Users.updateToken(user.id, token)
         return {token}
@@ -32,6 +33,19 @@ class authService {
 
     async logout (id) {
         await Users.updateToken(id, null)
+    }
+
+    async getUser(email, password){
+        const user = await Users.findByEmail(email)
+        if (!user) {
+            return null
+        }
+
+        if (!(await user?.isValidPassword(password))) {
+            return null
+        }
+
+        return user
     }
 
     generateToken(user) {
