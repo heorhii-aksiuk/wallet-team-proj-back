@@ -1,6 +1,8 @@
 const { Schema, model } = require('mongoose');
 const Categories = require('../helpers/categories');
 
+const categoriesNames = Categories.map(category => category.name);
+
 const transactionSchema = new Schema(
   {
     date: {
@@ -15,7 +17,7 @@ const transactionSchema = new Schema(
     category: {
       type: String,
       required: [true, 'Category is required.'],
-      enum: Categories,
+      enum: categoriesNames,
       default: 'Основные расходы',
     },
     comment: { type: String },
