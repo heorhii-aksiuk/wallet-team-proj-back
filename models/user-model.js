@@ -1,6 +1,5 @@
 const mongoose = require ('mongoose');
 const bcrypt = require('bcryptjs')
-// const { v4: uuidv4 } = require('uuid');
 
 const { Schema, model } = mongoose;
 
@@ -22,6 +21,10 @@ const userSchema = new Schema({
           type: String,
           required: [true, 'Email is required'],
           unique: true,
+          validate(value){
+            const re = /\S+@\S+\.\S+/g
+            return re.test(String(value).toLowerCase())
+          },
         },
         token: {
           type: String,
@@ -31,14 +34,6 @@ const userSchema = new Schema({
           type: String,
           default: null
         }
-        // isVerify:{
-        //   type: Boolean,
-        //   default: false
-        // },
-        // verifyEmailToken:{
-        //   type: String,
-        //   default: uuidv4()
-        // }
       },
 {
         versionKey: false,
