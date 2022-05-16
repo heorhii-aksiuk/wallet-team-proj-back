@@ -2,8 +2,8 @@
     "openapi": "3.0.1",
     "info": {
       "version": "1.0.0",
-      "title": "Swagger end-point routes",
-      "description": "Showing off swagger-ui-express",
+      "title": "Wallet end-point routes",
+      "description": "Wallet web application",
       "license": {
         "name": "MIT",
         "url": "https://opensource.org/licenses/MIT"
@@ -11,11 +11,32 @@
     },
     "consumes": ["application/json"],
     "produces": ["application/json"],
-    "servers": [{ "url": "http://localhost:3000" }],
+    "servers": [
+      { 
+        "url": "http://localhost:3000",
+        "description": "Development service"
+      }
+    ],
     "tags": [
       {
         "name": "Auth",
         "description": "Authorization endpoints"
+      },
+      {
+        "name": "User",
+        "description": "User endpoints"
+      },
+      {
+        "name": "Categories",
+        "description": "Categories endpoints"
+      },
+      {
+        "name": "Statistics",
+        "description": "Statisctics endpoints"
+      },
+      {
+        "name": "Transactions",
+        "description": "Transactions endpoints"
       }
     ],
 
@@ -102,7 +123,7 @@
           }
         }
       },
-    "/auth/logout": {
+      "/auth/logout": {
         "post": {
           "tags": ["Auth"],
           "summary": "User logout",
@@ -137,6 +158,24 @@
               "content": {}
             }
           }
+        }
+      },
+      "/categories": {
+        "get": {
+          "tags": ["Categories"]
+        }
+      },
+      "/statistics": {
+        "get": {
+          "tags": ["Statistics"]
+        }
+      },
+      "/transactions": {
+        "post": {
+          "tags": ["Transactions"]
+        },
+        "get": {
+          "tags": ["Transactions"]
         }
       }
     },
@@ -230,3 +269,4 @@
       }
     }
   }
+    
