@@ -166,7 +166,22 @@
     "/categories": {
       "get": {
         "tags": ["Categories"],
-        "summary": "Getting all categories"
+        "summary": "All categories",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCategoriesSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request response" }
+        }
       }
     },
     "/statistics": {
@@ -369,6 +384,75 @@
             "type": "integer",
             "description": "Sum of transaction",
             "example": 150
+          }
+        }
+      },
+      "getCategoriesSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of categories ojects",
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Category of transaction",
+                  "example": "Регулярный доход"
+                },
+                "income": {
+                  "type": "boolean",
+                  "description": "Is category an income",
+                  "example": true
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "categories": [
+              {
+                "name": "Регулярный доход",
+                "income": true
+              },
+              {
+                "name": "Нерегулярный доход",
+                "income": true
+              },
+              {
+                "name": "Разное",
+                "income": false
+              },
+              {
+                "name": "Продукты",
+                "income": false
+              },
+              {
+                "name": "Товары для дома",
+                "income": false
+              },
+              {
+                "name": "Образование",
+                "income": false
+              },
+              {
+                "name": "Основные расходы",
+                "income": false
+              }
+            ]
           }
         }
       },
