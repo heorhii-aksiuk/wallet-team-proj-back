@@ -20,7 +20,7 @@ const transactionSchema = new Schema(
       enum: categoriesNames,
       default: 'Основные расходы',
     },
-    comment: { type: String },
+    comment: { type: String, default: '' },
     sum: {
       type: Number,
       min: 0,

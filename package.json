@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Silicium Team Project",
   "main": "app.js",
-  "keywords": ["Wallet web application"],
+  "keywords": [
+    "Wallet web application"
+  ],
   "author": "Silicium Team",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./app.js",
@@ -12,6 +14,7 @@
     "lint:fix": "eslint --fix **/*.js"
   },
   "dependencies": {
+    "@joi/date": "^2.1.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
