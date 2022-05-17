@@ -166,21 +166,62 @@
     "/categories": {
       "get": {
         "tags": ["Categories"],
-        "summary": "Getting all categories"
+        "summary": "All categories",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCategoriesSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request response" }
+        }
       }
     },
     "/statistics": {
       "get": {
         "tags": ["Statistics"],
+        "summary": "Getting statistic",
         "parameters": [
           {
-            "in": "path",
-            "name": "password",
+            "in": "query",
+            "name": "startDate",
             "required": true,
-            "type": "string",
-            "description": "User's password"
+            "schema": {
+              "type": "string",
+              "example": "2022-04-17"
+            }
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2022-05-17"
+            }
           }
-        ]
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStatisticsSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": { "description": "Bad request response" }
+        }
       }
     },
     "/transactions": {
@@ -343,6 +384,172 @@
             "type": "integer",
             "description": "Sum of transaction",
             "example": 150
+          }
+        }
+      },
+      "getCategoriesSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of categories ojects",
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Category of transaction",
+                  "example": "Регулярный доход"
+                },
+                "income": {
+                  "type": "boolean",
+                  "description": "Is category an income",
+                  "example": true
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "categories": [
+              {
+                "name": "Регулярный доход",
+                "income": true
+              },
+              {
+                "name": "Нерегулярный доход",
+                "income": true
+              },
+              {
+                "name": "Разное",
+                "income": false
+              },
+              {
+                "name": "Продукты",
+                "income": false
+              },
+              {
+                "name": "Товары для дома",
+                "income": false
+              },
+              {
+                "name": "Образование",
+                "income": false
+              },
+              {
+                "name": "Основные расходы",
+                "income": false
+              }
+            ]
+          }
+        }
+      },
+      "getStatisticsSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "object",
+            "description": "Statistics for given period and balance totals",
+            "properties": {
+              "statistics": {
+                "type": "array",
+                "description": "Array of statistics objects",
+                "items": {
+                  "properties": {
+                    "category": {
+                      "type": "string",
+                      "description": "Category of transaction",
+                      "example": "Регулярный доход"
+                    },
+                    "income": {
+                      "type": "boolean",
+                      "description": "Is category an income",
+                      "example": true
+                    },
+                    "sum": {
+                      "type": "integer",
+                      "description": "Total amount of this type of transaction",
+                      "example": 5000
+                    }
+                  }
+                }
+              },
+              "totals": {
+                "type": "object",
+                "properties": {
+                  "income": {
+                    "type": "integer",
+                    "description": "Amount of total income within given period",
+                    "example": 5000
+                  },
+                  "expense": {
+                    "type": "integer",
+                    "description": "Amount of total expenses within given period",
+                    "example": 500
+                  },
+                  "balance": {
+                    "type": "integer",
+                    "description": "Amount of total current balance within given period",
+                    "example": 4500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "statistics": [
+              {
+                "category": "Регулярный доход",
+                "income": true,
+                "sum": 5000
+              },
+              {
+                "category": "Основные расходы",
+                "income": false,
+                "sum": 500
+              },
+              {
+                "category": "Забота о себе",
+                "income": false,
+                "sum": 300
+              },
+              {
+                "category": "Досуг",
+                "income": false,
+                "sum": 200
+              }
+            ],
+            "totals": {
+              "income": 5000,
+              "expense": 1000,
+              "balance": 4000
+            }
           }
         }
       },
