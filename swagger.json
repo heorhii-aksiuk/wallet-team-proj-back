@@ -220,7 +220,16 @@
               }
             }
           },
-          "400": { "description": "Bad request response" }
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStatisticsErrorResponse"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -550,6 +559,26 @@
               "expense": 1000,
               "balance": 4000
             }
+          }
+        }
+      },
+      "getStatisticsErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "error"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "description": "Joi validation error message",
+            "example": "'endDate' is required"
           }
         }
       },
