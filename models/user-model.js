@@ -23,9 +23,11 @@ const userSchema = new Schema(
       required: [true, 'Email is required'],
       unique: true,
       validate(value) {
-        const re = /\S+@\S+\.\S+/g
+        const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        console.log(re.test(String(value).toLowerCase()));
         return re.test(String(value).toLowerCase())
       },
+      
     },
     token: {
       type: String,
@@ -42,7 +44,7 @@ const userSchema = new Schema(
     toJSON: {
       virtuals: true,
       transform: (doc, ret) => {
-        delete ret.favorite
+        delete ret.repeatPassword
         delete ret._id
         return ret
       },
