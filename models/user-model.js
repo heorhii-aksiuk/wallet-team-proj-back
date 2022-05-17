@@ -24,7 +24,6 @@ const userSchema = new Schema(
       unique: true,
       validate(value) {
         const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-        console.log(re.test(String(value).toLowerCase()));
         return re.test(String(value).toLowerCase())
       },
       
