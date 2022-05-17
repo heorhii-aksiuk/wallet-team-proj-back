@@ -8,7 +8,7 @@ class CategoriesControllers {
       res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.OK,
-        data: { categories: Categories },
+        data: { categories: Categories }
       });
     } catch (error) {
       next(error);

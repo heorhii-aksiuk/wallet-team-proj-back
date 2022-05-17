@@ -11,7 +11,7 @@ class TransactionControllers {
 
       res.json({
         status: Statuses.SUCCESS,
-        code: HttpCodes.OK,
+        code: HttpCodes.CREATED,
         data: { allTransactions, totals },
       });
     } catch (error) {

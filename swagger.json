@@ -251,7 +251,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Success response",
             "content": {
               "application/json": {
@@ -593,7 +593,7 @@
           "code": {
             "type": "integer",
             "description": "HTTP code",
-            "example": 200
+            "example": 201
           },
           "data": {
             "type": "object",

@@ -11,7 +11,7 @@ const db = require('./db/mongo-db')
 const { Limits } = require('./config/limits')
 const HttpCodes = require('./helpers/http-codes')
 const Ports = require('./helpers/ports')
-const authRouter = require('./routes/api/auth')
+const authRouter = require('./router/auth-routes')
 
 const categoriesRoutes = require('./router/categories-routes')
 const statisticsRoutes = require('./router/statistics-routes')
@@ -30,7 +30,7 @@ app.use(cookieParser())
 app.use(categoriesRoutes)
 app.use(statisticsRoutes)
 app.use(transactionsRoutes)
-app.use('/api/auth', authRouter)
+app.use('/api/auth-routes', authRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // 404 Not found

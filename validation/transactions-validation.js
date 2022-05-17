@@ -12,7 +12,7 @@ const createTransactionSchema = Joi.object({
     .valid(...categoriesNames)
     .required(),
   comment: Joi.string().trim().max(150).optional(),
-  sum: Joi.number().min(0).required(),
+  sum: Joi.number().min(0).required()
 });
 
 const validateRequestAgainstSchema = async (schema, request, next) => {
@@ -22,7 +22,7 @@ const validateRequestAgainstSchema = async (schema, request, next) => {
   } catch (error) {
     next({
       status: HttpCodes.BAD_REQUEST,
-      message: error.message,
+      message: error.message
     });
   }
 };

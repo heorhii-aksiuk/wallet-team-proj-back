@@ -1,5 +1,5 @@
 const Ports = {
-    DEFAULT: 3000,
+    DEFAULT: 3001,
 };
   
 module.exports = Ports;

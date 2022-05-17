@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const Users = require ('../repository/user')
+const Users = require ('../repositories/user-repository')
 const HttpCodes = require('../helpers/http-codes')
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY
