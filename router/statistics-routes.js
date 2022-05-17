@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const {
     validateStatisticsQuery,
-} = require('../validaton/statistics-validation');
+} = require('../validation/statistics-validation');
 const Controllers = require('../controllers/statistics-controllers');
 
 const statisticsRoutes = Router();
