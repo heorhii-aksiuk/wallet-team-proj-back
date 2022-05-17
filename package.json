@@ -1,7 +1,7 @@
 {
   "name": "wallet-team-proj-back",
   "version": "0.1.0",
-  "description": "",
+  "description": "Silicium Team Project",
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./app.js",
@@ -26,7 +26,7 @@
     "mongodb": "^4.6.0",
     "mongoose": "^6.3.3",
     "morgan": "1.10.0",
-    "swagger-ui-express": "4.4.0",
+    "swagger-ui-express": "^4.4.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
