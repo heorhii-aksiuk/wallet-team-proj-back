@@ -7,16 +7,15 @@ const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger.json')
 
-
 const db = require('./db/mongo-db')
 const { Limits } = require('./config/limits')
 const HttpCodes = require('./helpers/http-codes')
 const Ports = require('./helpers/ports')
+const authRouter = require('./routes/api/auth')
 
 const categoriesRoutes = require('./router/categories-routes')
-const statisticsRoutes = require('./router/statistics-routes');
+const statisticsRoutes = require('./router/statistics-routes')
 const transactionsRoutes = require('./router/transactions-routes')
-
 
 const PORT = process.env.PORT || Ports.DEFAULT
 
@@ -31,6 +30,7 @@ app.use(cookieParser())
 app.use(categoriesRoutes)
 app.use(statisticsRoutes)
 app.use(transactionsRoutes)
+app.use('/api/auth', authRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // 404 Not found
