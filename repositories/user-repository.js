@@ -17,4 +17,18 @@ const updateToken = async (id, token) => {
     return await User.findByIdAndUpdate(id, {token})
 }
 
-module.exports = {findById, findByEmail, create, updateToken}
+const findByPass = async (password) =>{
+    return await User.findOne({password})
+}
+const findByRepPass = async (repeatPassword) =>{
+    return await User.findOne({repeatPassword})
+}
+
+// const matchPass = async (password, repeatPass) => {
+//     if(User(password)!==User(repeatPass)){
+//         return ('You entered different passwords. Please try again.')
+//     }
+//     return ('Password match')
+// }
+
+module.exports = {findById, findByEmail, create, updateToken, findByPass, findByRepPass}
