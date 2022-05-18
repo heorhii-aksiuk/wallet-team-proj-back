@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const Users = require ('../repository/user')
+const Users = require ('../repositories/user-repository')
 const HttpCodes = require('../helpers/http-codes')
 const {CustomError} = require('../middlewares/custom-error')
 

@@ -220,7 +220,16 @@
               }
             }
           },
-          "400": { "description": "Bad request response" }
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getStatisticsErrorResponse"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -242,7 +251,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Success response",
             "content": {
               "application/json": {
@@ -553,6 +562,26 @@
           }
         }
       },
+      "getStatisticsErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "error"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "description": "Joi validation error message",
+            "example": "'endDate' is required"
+          }
+        }
+      },
       "createTransactionSuccessResponse": {
         "type": "object",
         "properties": {
@@ -564,7 +593,7 @@
           "code": {
             "type": "integer",
             "description": "HTTP code",
-            "example": 200
+            "example": 201
           },
           "data": {
             "type": "object",
