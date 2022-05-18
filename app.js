@@ -28,7 +28,7 @@ app.use(boolParser())
 app.use(cookieParser())
 
 app.use('/categories', categoriesRoutes);
-app.use(statisticsRoutes)
+app.use('/statistics', statisticsRoutes);
 app.use('/transactions', transactionsRoutes);
 app.use('/api/auth-routes', authRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
