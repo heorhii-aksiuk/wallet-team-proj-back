@@ -11,6 +11,9 @@ class authService {
         if (user) {
             throw new CustomError (HttpCodes.CONFLICT, 'User already exists')
         }
+        if(body.password!==body.repeatPassword){
+                throw new CustomError (HttpCodes.BAD_REQUEST, 'Password must be repeated')
+            }
 
         const newUser = await Users.create(body)
 

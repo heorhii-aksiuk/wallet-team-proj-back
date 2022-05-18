@@ -1,5 +1,5 @@
 class CustomError extends Error {
-    constructor(statusCode, message, name = 'appError') {
+    constructor(statusCode, message, name = 'AppError') {
         super (message)
         this.statusCode = statusCode
         this.status = `$(statusCode)`.startsWith('4') ? 'error' : 'fail'
