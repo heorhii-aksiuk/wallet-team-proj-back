@@ -27,13 +27,12 @@ app.use(express.json({ limit: Limits.JSON }))
 app.use(boolParser())
 app.use(cookieParser())
 
-app.use('/categories', categoriesRoutes);
-app.use('/statistics', statisticsRoutes);
-app.use('/transactions', transactionsRoutes);
-app.use('/api/auth-routes', authRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/api/categories', categoriesRoutes);
+app.use('/api/statistics', statisticsRoutes);
+app.use('/api/transactions', transactionsRoutes);
+app.use('/api/auth', authRouter)
 
-// 404 Not found
 app.use((req, res) => {
   res.status(HttpCodes.NOT_FOUND).json({
     status: 'error',
@@ -42,7 +41,6 @@ app.use((req, res) => {
   })
 })
 
-// Central errors handling
 app.use((err, req, res, next) => {
   const statusCode = err.status || HttpCodes.INTERNAL_SERVER_ERROR
 
