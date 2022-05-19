@@ -31,13 +31,12 @@ app.use(cookieParser())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/api/auth', authRouter)
 app.use('/users', currentRouter)
-app.use(categoriesRoutes)
-app.use(statisticsRoutes)
-app.use(transactionsRoutes)
+app.use('/categories', categoriesRoutes)
+app.use('/statistics', statisticsRoutes)
+app.use('/transactions', transactionsRoutes)
 
 // 404 Not found
 app.use((req, res) => {
-  console.log("qwe");
   res.status(HttpCodes.NOT_FOUND).json({
     status: 'error',
     code: HttpCodes.NOT_FOUND,
