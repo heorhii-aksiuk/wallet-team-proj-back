@@ -29,7 +29,7 @@ app.use(boolParser())
 app.use(cookieParser())
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/api/auth', authRouter)
+app.use('/auth', authRouter)
 app.use('/users', currentRouter)
 app.use('/categories', categoriesRoutes)
 app.use('/statistics', statisticsRoutes)
