@@ -24,11 +24,4 @@ const findByRepPass = async (repeatPassword) =>{
     return await User.findOne({repeatPassword})
 }
 
-// const matchPass = async (password, repeatPass) => {
-//     if(User(password)!==User(repeatPass)){
-//         return ('You entered different passwords. Please try again.')
-//     }
-//     return ('Password match')
-// }
-
 module.exports = {findById, findByEmail, create, updateToken, findByPass, findByRepPass}

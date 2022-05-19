@@ -12,6 +12,7 @@ const { Limits } = require('./config/limits')
 const HttpCodes = require('./helpers/http-codes')
 const Ports = require('./helpers/ports')
 const authRouter = require('./router/auth-routes')
+const currentRouter = require('./router/user-routes')
 
 const categoriesRoutes = require('./router/categories-routes')
 const statisticsRoutes = require('./router/statistics-routes')
@@ -27,14 +28,16 @@ app.use(express.json({ limit: Limits.JSON }))
 app.use(boolParser())
 app.use(cookieParser())
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/api/auth', authRouter)
+app.use('/users', currentRouter)
 app.use(categoriesRoutes)
 app.use(statisticsRoutes)
 app.use(transactionsRoutes)
-app.use('/api/auth-routes', authRouter)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 // 404 Not found
 app.use((req, res) => {
+  console.log("qwe");
   res.status(HttpCodes.NOT_FOUND).json({
     status: 'error',
     code: HttpCodes.NOT_FOUND,
