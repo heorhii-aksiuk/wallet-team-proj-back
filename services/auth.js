@@ -31,7 +31,11 @@ class authService {
         }
         const token = this.generateToken(user)
         await Users.updateToken(user.id, token)
-        return {token}
+        return {
+            id:user.id,
+            name: user.name,
+            token
+        }
     }
 
     async logout (id) {

@@ -10,11 +10,11 @@ const registration = async (req, res) => {
 })
 }
 const login = async (req, res) => {
-    const token = await authService.login(req.body)
+    const user = await authService.login(req.body)
     return res.status(HttpCodes.OK).json({ 
         status: 'success', 
-        code: HttpCodes.OK, 
-        data: { token } }) 
+        code: HttpCodes.OK,
+        user: { ...user } }) 
 }
 const logout = async (req, res) => {
     await authService.logout(req.user.id)
