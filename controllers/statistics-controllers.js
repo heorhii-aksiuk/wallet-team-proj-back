@@ -8,9 +8,16 @@ class StatisticsControllers {
   async getStatistics(req, res, next) {
     try {
       const { startDate, endDate } = req.query;
+      const { id } = req.user;
 
       const allTransactionsWithinPeriod =
-        await Transactions.getAllTransactionsWithinPeriod(startDate, endDate);
+        await Transactions.getAllTransactionsWithinPeriod(
+          id,
+          startDate,
+          endDate,
+        );
+
+      const transaction = await Transactions.getEarliestTransaction(id);
 
       const statistics = calculateStatistics(allTransactionsWithinPeriod);
       const totals = calculateTotals(allTransactionsWithinPeriod);
@@ -18,7 +25,7 @@ class StatisticsControllers {
       res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.OK,
-        data: { statistics, totals },
+        data: { statistics, totals, earliest: transaction?.date || {} },
       });
     } catch (error) {
       next(error);
