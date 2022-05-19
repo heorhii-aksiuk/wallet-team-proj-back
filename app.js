@@ -13,7 +13,6 @@ const HttpCodes = require('./helpers/http-codes')
 const Ports = require('./helpers/ports')
 const authRouter = require('./router/auth-routes')
 const currentRouter = require('./router/user-routes')
-
 const categoriesRoutes = require('./router/categories-routes')
 const statisticsRoutes = require('./router/statistics-routes')
 const transactionsRoutes = require('./router/transactions-routes')
