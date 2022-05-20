@@ -163,34 +163,13 @@
         }
       }
     },
-    "/categories": {
-      "get": {
-        "tags": ["Categories"],
-        "summary": "All categories",
-        "parameters": [],
-        "security": [{ "Bearer": [] }],
-        "responses": {
-          "200": {
-            "description": "Success response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/getCategoriesSuccessResponse"
-                }
-              }
-            }
-          },
-          "400": { "description": "Bad request response" }
-        }
-      }
-    },
     "/statistics": {
       "get": {
         "tags": ["Statistics"],
         "summary": "Getting statistic",
         "parameters": [
           {
-            "in": "query",
+            "in": "body",
             "name": "startDate",
             "required": true,
             "schema": {
@@ -199,7 +178,7 @@
             }
           },
           {
-            "in": "query",
+            "in": "body",
             "name": "endDate",
             "required": true,
             "schema": {
@@ -229,6 +208,315 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/hardcoded": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Getting hardcoded categories",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getHardcodedCategoriesSuccessResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories": {
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Add a new category",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Add category",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createCategoryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createCategorySuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createCategoryErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Categories"],
+        "summary": "All categories",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCategoriesSuccessResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{categoryId}": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Getting category by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "required": true,
+            "description": "Category ID",
+            "schema": {
+              "type": "string",
+              "example": "628682f56ae1b0812d14a878"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCategorySuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/invalidDbIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resourceNotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Categories"],
+        "summary": "Updating category by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "required": true,
+            "description": "Category ID",
+            "schema": {
+              "type": "string",
+              "example": "628682f56ae1b0812d14a878"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Update category",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateCategoryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getCategorySuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createCategoryErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resourceNotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Deleting category by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "required": true,
+            "description": "Category ID",
+            "schema": {
+              "type": "string",
+              "example": "628682f56ae1b0812d14a878"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteCategorySuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/invalidDbIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resourceNotFoundResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -240,7 +528,7 @@
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "requestBody": {
-          "description": "Create transaction request body",
+          "description": "Create transaction",
           "required": true,
           "content": {
             "application/json": {
@@ -261,13 +549,51 @@
               }
             }
           },
-          "400": { "description": "Bad request response" }
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createTransactionErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          }
         }
       },
       "get": {
         "tags": ["Transactions"],
-        "summary": "Getting all transactions of a user",
-        "parameters": [],
+        "summary": "Getting all transactions",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "startDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2022-04-20"
+            }
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "2022-05-20"
+            }
+          }
+        ],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -280,7 +606,216 @@
               }
             }
           },
-          "400": { "description": "Bad request response" }
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/queryParamsErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/{transactionId}": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Getting transaction by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "description": "Transaction ID",
+            "schema": {
+              "type": "string",
+              "example": "628682f56ae1b0812d14a878"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTransactionSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/invalidDbIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resourceNotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Transactions"],
+        "summary": "Updating transaction by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "description": "Transaction ID",
+            "schema": {
+              "type": "string",
+              "example": "628682f56ae1b0812d14a878"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Update transaction",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateTransactionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getTransactionSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createTransactionErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resourceNotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Transactions"],
+        "summary": "Deleting transaction by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "description": "Transaction ID",
+            "schema": {
+              "type": "string",
+              "example": "628682f56ae1b0812d14a878"
+            }
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/deleteTransactionSuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/invalidDbIdResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unathorized error response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/unauthorizedErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Transaction not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/resourceNotFoundResponse"
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -365,106 +900,6 @@
         "type": "string",
         "description": "User logout!"
       },
-      "createTransactionRequest": {
-        "type": "object",
-        "required": ["date", "income", "category", "sum"],
-        "properties": {
-          "date": {
-            "type": "string",
-            "description": "Transaction's date",
-            "example": "2022-05-16"
-          },
-          "income": {
-            "type": "boolean",
-            "description": "Is transaction income",
-            "example": false
-          },
-          "category": {
-            "type": "string",
-            "description": "Category of transaction",
-            "example": "Основные расходы"
-          },
-          "comment": {
-            "type": "string",
-            "description": "User's comment",
-            "example": "Еда"
-          },
-          "sum": {
-            "type": "integer",
-            "description": "Sum of transaction",
-            "example": 150
-          }
-        }
-      },
-      "getCategoriesSuccessResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "Operation status",
-            "example": "success"
-          },
-          "code": {
-            "type": "integer",
-            "description": "HTTP code",
-            "example": 200
-          },
-          "data": {
-            "type": "array",
-            "description": "Array of categories ojects",
-            "items": {
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "Category of transaction",
-                  "example": "Регулярный доход"
-                },
-                "income": {
-                  "type": "boolean",
-                  "description": "Is category an income",
-                  "example": true
-                }
-              }
-            }
-          }
-        },
-        "example": {
-          "status": "success",
-          "code": 200,
-          "data": {
-            "categories": [
-              {
-                "name": "Регулярный доход",
-                "income": true
-              },
-              {
-                "name": "Нерегулярный доход",
-                "income": true
-              },
-              {
-                "name": "Разное",
-                "income": false
-              },
-              {
-                "name": "Продукты",
-                "income": false
-              },
-              {
-                "name": "Товары для дома",
-                "income": false
-              },
-              {
-                "name": "Образование",
-                "income": false
-              },
-              {
-                "name": "Основные расходы",
-                "income": false
-              }
-            ]
-          }
-        }
-      },
       "getStatisticsSuccessResponse": {
         "type": "object",
         "properties": {
@@ -499,8 +934,13 @@
                     },
                     "sum": {
                       "type": "integer",
-                      "description": "Total amount of this type of transaction",
-                      "example": 5000
+                      "description": "Total amount of this type of transaction within given period",
+                      "example": 500
+                    },
+                    "color": {
+                      "type": "string",
+                      "description": "Color of the transaction category",
+                      "example": "#6e78e8"
                     }
                   }
                 }
@@ -511,19 +951,24 @@
                   "income": {
                     "type": "integer",
                     "description": "Amount of total income within given period",
-                    "example": 5000
+                    "example": 500
                   },
                   "expense": {
                     "type": "integer",
                     "description": "Amount of total expenses within given period",
-                    "example": 500
+                    "example": 200
                   },
                   "balance": {
                     "type": "integer",
                     "description": "Amount of total current balance within given period",
-                    "example": 4500
+                    "example": 300
                   }
                 }
+              },
+              "earliest": {
+                "type": "string",
+                "description": "Date the transaction was made indicated by user",
+                "example": "2022-05-19T00:00:00.000Z"
               }
             }
           }
@@ -536,29 +981,34 @@
               {
                 "category": "Регулярный доход",
                 "income": true,
-                "sum": 5000
+                "sum": 1500,
+                "color": "#1b5e20"
               },
               {
                 "category": "Основные расходы",
                 "income": false,
-                "sum": 500
+                "sum": 200,
+                "color": "#fed057"
               },
               {
-                "category": "Забота о себе",
+                "category": "Машина",
                 "income": false,
-                "sum": 300
+                "sum": 300,
+                "color": "#6e78e8"
               },
               {
-                "category": "Досуг",
+                "category": "Продукты",
                 "income": false,
-                "sum": 200
+                "sum": 400,
+                "color": "#4a56e2"
               }
             ],
             "totals": {
-              "income": 5000,
-              "expense": 1000,
-              "balance": 4000
-            }
+              "income": 500,
+              "expense": 900,
+              "balance": 600
+            },
+            "earliest": "2022-05-19T00:00:00.000Z"
           }
         }
       },
@@ -582,6 +1032,424 @@
           }
         }
       },
+      "getHardcodedCategoriesSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of categories ojects",
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Category of transaction",
+                  "example": "Регулярный доход"
+                },
+                "income": {
+                  "type": "boolean",
+                  "description": "Is category an income",
+                  "example": true
+                },
+                "color": {
+                  "type": "string",
+                  "description": "Color of the transaction category",
+                  "example": "#6e78e8"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "categories": [
+              {
+                "name": "Регулярный доход",
+                "income": true,
+                "color": "#1b5e20"
+              },
+              {
+                "name": "Продукты",
+                "income": false,
+                "color": "#4a56e2"
+              },
+              {
+                "name": "Образование",
+                "income": false,
+                "color": "#c5baff"
+              }
+            ]
+          }
+        }
+      },
+      "getCategoriesSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of categories ojects",
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Category ID",
+                  "example": "6042f456e080193948016539"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Category's name",
+                  "example": "Машина"
+                },
+                "income": {
+                  "type": "boolean",
+                  "description": "Is category income",
+                  "example": false
+                },
+                "color": {
+                  "type": "string",
+                  "description": "Custom color in hex format",
+                  "example": "#009688"
+                },
+                "icon": {
+                  "type": "string",
+                  "description": "Custom icon name",
+                  "example": "car-icon"
+                },
+                "owner": {
+                  "type": "string",
+                  "description": "Owner's ID",
+                  "example": "40e073cfe63c0b3ed49951c1"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "description": "Date of entry creation",
+                  "example": "2022-05-19T17:51:48.716Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "description": "Date of entry update",
+                  "example": "2022-05-19T17:51:48.716Z"
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "categories": [
+              {
+                "income": false,
+                "color": "#d84315",
+                "icon": "car-icon",
+                "name": "Машина",
+                "owner": "40e073cfe63c0b3ed49951c1",
+                "createdAt": "2022-05-19T17:52:48.456Z",
+                "updatedAt": "2022-05-19T17:52:48.456Z",
+                "id": "60566f5d38023412909f6897"
+              },
+              {
+                "income": true,
+                "color": "#ffeb3b",
+                "icon": "money-icon",
+                "name": "Зарплата",
+                "owner": "40e073cfe63c0b3ed49951c1",
+                "createdAt": "2022-05-19T17:51:48.716Z",
+                "updatedAt": "2022-05-19T17:51:48.716Z",
+                "id": "6042f456e080193948016539"
+              }
+            ]
+          }
+        }
+      },
+      "createCategoryRequest": {
+        "type": "object",
+        "required": ["name", "income"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Category's name",
+            "example": "Машина"
+          },
+          "income": {
+            "type": "boolean",
+            "description": "Is category income",
+            "example": false
+          },
+          "color": {
+            "type": "string",
+            "description": "Custom color in hex format",
+            "example": "#009688"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Custom icon name",
+            "example": "car-icon"
+          }
+        }
+      },
+      "createCategorySuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 201
+          },
+          "data": {
+            "type": "object",
+            "description": "Information about newly created category",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Category ID",
+                "example": "6042f456e080193948016539"
+              },
+              "name": {
+                "type": "string",
+                "description": "Category's name",
+                "example": "Машина"
+              },
+              "income": {
+                "type": "boolean",
+                "description": "Is category income",
+                "example": false
+              },
+              "color": {
+                "type": "string",
+                "description": "Custom color in hex format",
+                "example": "#009688"
+              },
+              "icon": {
+                "type": "string",
+                "description": "Custom icon name",
+                "example": "car-icon"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Owner's ID",
+                "example": "40e073cfe63c0b3ed49951c1"
+              },
+              "createdAt": {
+                "type": "string",
+                "description": "Date of entry creation",
+                "example": "2022-05-19T17:51:48.716Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "description": "Date of entry update",
+                "example": "2022-05-19T17:51:48.716Z"
+              }
+            }
+          }
+        }
+      },
+      "createCategoryErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "error"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "description": "Joi validation error message",
+            "example": "'income' is required"
+          }
+        }
+      },
+      "getCategorySuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "object",
+            "description": "Сategory object",
+            "properties": {
+              "category": {
+                "type": "object",
+                "description": "Category object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Category ID",
+                    "example": "6042f456e080193948016539"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "Category's name",
+                    "example": "Машина"
+                  },
+                  "income": {
+                    "type": "boolean",
+                    "description": "Is category income",
+                    "example": false
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Custom color",
+                    "example": "#009688"
+                  },
+                  "icon": {
+                    "type": "string",
+                    "description": "Custom icon name",
+                    "example": "car-icon"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "description": "Owner's ID",
+                    "example": "40e073cfe63c0b3ed49951c1"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "Date of entry creation",
+                    "example": "2022-05-19T17:51:48.716Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "Date of entry update",
+                    "example": "2022-05-19T17:51:48.716Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "category": {
+              "income": false,
+              "color": "#d84315",
+              "icon": "car-icon",
+              "name": "Машина",
+              "owner": "40e073cfe63c0b3ed49951c1",
+              "createdAt": "2022-05-19T17:51:48.716Z",
+              "updatedAt": "2022-05-19T17:51:48.716Z",
+              "id": "6042f456e080193948016539"
+            }
+          }
+        }
+      },
+      "updateCategoryRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Category's name",
+            "example": "Машина"
+          },
+          "income": {
+            "type": "boolean",
+            "description": "Is category income",
+            "example": false
+          },
+          "color": {
+            "type": "string",
+            "description": "Custom color in hex format",
+            "example": "#009688"
+          },
+          "icon": {
+            "type": "string",
+            "description": "Custom icon name",
+            "example": "car-icon"
+          }
+        }
+      },
+      "deleteCategorySuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Category was successfully deleted."
+          }
+        }
+      },
+      "createTransactionRequest": {
+        "type": "object",
+        "required": ["date", "income", "category", "sum"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Transaction's date indicated by user",
+            "example": "2022-05-19"
+          },
+          "income": {
+            "type": "boolean",
+            "description": "Is transaction income",
+            "example": false
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of transaction",
+            "example": "Основные расходы"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User's comment about transaction",
+            "example": "Кофе"
+          },
+          "sum": {
+            "type": "integer",
+            "description": "Sum of transaction",
+            "example": 45
+          }
+        }
+      },
       "createTransactionSuccessResponse": {
         "type": "object",
         "properties": {
@@ -597,17 +1465,17 @@
           },
           "data": {
             "type": "object",
-            "description": "Information about created transaction",
+            "description": "Information about created tansaction",
             "properties": {
               "id": {
                 "type": "string",
                 "description": "Transaction ID",
-                "example": "70e3fcb6e0601939c9016537"
+                "example": "6042f456e080193948016539"
               },
               "date": {
                 "type": "string",
-                "description": "Transaction's date",
-                "example": "2022-05-16"
+                "description": "Transaction's date indicated by user",
+                "example": "2022-05-17"
               },
               "income": {
                 "type": "boolean",
@@ -621,25 +1489,75 @@
               },
               "comment": {
                 "type": "string",
-                "description": "User's comment",
+                "description": "User's comment about transaction",
                 "example": "Продукты на неделю"
               },
               "sum": {
                 "type": "integer",
                 "description": "Sum of transaction",
-                "example": 500
+                "example": 1400
               },
               "createdAt": {
                 "type": "string",
                 "description": "Date of entry creation",
-                "example": "2022-05-16T15:33:04.595Z"
+                "example": "2022-05-19T17:51:48.716Z"
               },
               "updatedAt": {
                 "type": "string",
                 "description": "Date of entry update",
-                "example": "2022-05-16T15:33:04.595Z"
+                "example": "2022-05-19T17:51:48.716Z"
               }
             }
+          }
+        }
+      },
+      "createTransactionErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "error"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "description": "Joi validation error message",
+            "example": "'date' must be in YYYY-MM-DD format"
+          }
+        }
+      },
+      "updateTransactionRequest": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Transaction's date",
+            "example": "2022-05-19"
+          },
+          "income": {
+            "type": "boolean",
+            "description": "Is transaction income",
+            "example": false
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of transaction",
+            "example": "Основные расходы"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User's comment about transaction",
+            "example": "Кофе"
+          },
+          "sum": {
+            "type": "integer",
+            "description": "Sum of transaction",
+            "example": 45
           }
         }
       },
@@ -658,9 +1576,9 @@
           },
           "data": {
             "type": "object",
-            "description": "Information about transactions and balance totals",
+            "description": "Information about tansactions and balance totals",
             "properties": {
-              "allTransactions": {
+              "transactions": {
                 "type": "array",
                 "description": "Array of transactions objects",
                 "items": {
@@ -668,7 +1586,7 @@
                     "id": {
                       "type": "string",
                       "description": "Transaction ID",
-                      "example": "70e3fcb6e0601939c9016537"
+                      "example": "628690f312bcd3046967abf9"
                     },
                     "category": {
                       "type": "string",
@@ -683,27 +1601,32 @@
                     "date": {
                       "type": "string",
                       "description": "Date indicated by the user",
-                      "example": "2022-05-15T12:00:00.000Z"
+                      "example": "2022-05-19T00:00:00.000Z"
                     },
                     "comment": {
                       "type": "string",
                       "description": "Comment for the transaction",
-                      "example": "Зарплата за апрель"
+                      "example": "Зарплата"
                     },
                     "sum": {
                       "type": "integer",
                       "description": "Amount of the transaction",
                       "example": 5000
                     },
+                    "owner": {
+                      "type": "string",
+                      "description": "ID of the user who created the transaction",
+                      "example": "40e073cfe63c0b3ed49951c1"
+                    },
                     "createdAt": {
                       "type": "string",
                       "description": "Date of entry creation",
-                      "example": "2022-05-15T11:24:43.593Z"
+                      "example": "2022-05-19T17:51:48.716Z"
                     },
                     "updatedAt": {
                       "type": "string",
                       "description": "Date of entry update",
-                      "example": "2022-05-15T11:24:43.593Z"
+                      "example": "2022-05-19T17:51:48.716Z"
                     }
                   }
                 }
@@ -719,12 +1642,12 @@
                   "expense": {
                     "type": "integer",
                     "description": "Amount of total expenses",
-                    "example": 500
+                    "example": 200
                   },
                   "balance": {
                     "type": "integer",
                     "description": "Amount of total current balance",
-                    "example": 4500
+                    "example": 4800
                   }
                 }
               }
@@ -735,38 +1658,146 @@
           "status": "success",
           "code": 200,
           "data": {
-            "allTransactions": [
+            "transactions": [
               {
-                "id": "70e3fcb6e0601939c9016537",
+                "id": "628690f312bcd3046967abf9",
                 "category": "Регулярный доход",
                 "income": true,
-                "date": "2022-05-15T12:00:00.000Z",
-                "comment": "Зарплата за апрель",
+                "date": "2022-05-19T00:00:00.000Z",
+                "comment": "Зарплата",
                 "sum": 5000,
-                "createdAt": "2022-05-15T11:24:43.593Z",
-                "updatedAt": "2022-05-15T11:24:43.593Z"
+                "createdAt": "2022-05-19T17:51:48.716Z",
+                "updatedAt": "2022-05-19T17:51:48.716Z"
               },
               {
-                "id": "50e3fch5e0104935c9016537",
+                "id": "70e2f576e0405939c801653b",
                 "category": "Основные расходы",
                 "income": false,
-                "date": "2022-05-15T12:00:00.000Z",
+                "date": "2022-05-19T00:00:00.000Z",
                 "comment": "Еда",
-                "sum": 500,
-                "createdAt": "2022-05-15T11:24:43.593Z",
-                "updatedAt": "2022-05-15T11:24:43.593Z"
+                "sum": 200,
+                "createdAt": "2022-05-19T17:51:48.716Z",
+                "updatedAt": "2022-05-19T17:51:48.716Z"
               }
             ],
             "totals": {
               "income": 5000,
-              "expense": 500,
-              "balance": 4500
+              "expense": 200,
+              "balance": 4800
             }
+          }
+        }
+      },
+      "getTransactionSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "data": {
+            "type": "object",
+            "description": "Payload with information about tansactions and balance totals",
+            "properties": {
+              "transaction": {
+                "type": "object",
+                "description": "Requested transaction",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "Transaction ID",
+                    "example": "628682f56ae1b0812d14a878"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "Category of transaction",
+                    "example": "Еда"
+                  },
+                  "income": {
+                    "type": "boolean",
+                    "description": "Is category an income",
+                    "example": true
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "Date indicated by the user",
+                    "example": "2022-05-19T00:00:00.000Z"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "Comment for the transaction",
+                    "example": "Еда на неделю"
+                  },
+                  "sum": {
+                    "type": "integer",
+                    "description": "Amount of the transaction",
+                    "example": 700
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "description": "Date of entry creation",
+                    "example": "2022-05-19T17:51:48.716Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "description": "Date of entry update",
+                    "example": "2022-05-19T17:51:48.716Z"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "description": "Owner's ID",
+                    "example": "40e073cfe63c0b3ed49951c1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "status": "success",
+          "code": 200,
+          "data": {
+            "transaction": {
+              "income": false,
+              "category": "Еда",
+              "comment": "Продукты на неделю",
+              "date": "2022-05-19T00:00:00.000Z",
+              "sum": 700,
+              "owner": "40e073cfe63c0b3ed49951c1",
+              "createdAt": "2022-05-19T17:51:48.716Z",
+              "updatedAt": "2022-05-19T17:51:48.716Z",
+              "id": "628682f56ae1b0812d14a878"
+            }
+          }
+        }
+      },
+      "deleteTransactionSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "success"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Transaction was successfully deleted."
           }
         }
       }
     },
-
     "securitySchemes": {
       "Bearer": {
         "type": "http",

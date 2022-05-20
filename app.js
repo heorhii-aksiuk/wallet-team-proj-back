@@ -28,10 +28,10 @@ app.use(boolParser())
 app.use(cookieParser())
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/api/categories', categoriesRoutes);
-app.use('/api/statistics', statisticsRoutes);
-app.use('/api/transactions', transactionsRoutes);
-app.use('/api/auth', authRouter)
+app.use('/categories', categoriesRoutes);
+app.use('/statistics', statisticsRoutes);
+app.use('/transactions', transactionsRoutes);
+app.use('/auth', authRouter)
 
 app.use((req, res) => {
   res.status(HttpCodes.NOT_FOUND).json({
