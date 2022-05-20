@@ -13,7 +13,6 @@ const HttpCodes = require('./helpers/http-codes')
 const Ports = require('./helpers/ports')
 const authRouter = require('./router/auth-routes')
 const currentRouter = require('./router/user-routes')
-
 const categoriesRoutes = require('./router/categories-routes')
 const statisticsRoutes = require('./router/statistics-routes')
 const transactionsRoutes = require('./router/transactions-routes')
@@ -35,7 +34,6 @@ app.use('/categories', categoriesRoutes)
 app.use('/statistics', statisticsRoutes)
 app.use('/transactions', transactionsRoutes)
 
-// 404 Not found
 app.use((req, res) => {
   res.status(HttpCodes.NOT_FOUND).json({
     status: 'error',
@@ -44,7 +42,6 @@ app.use((req, res) => {
   })
 })
 
-// Central errors handling
 app.use((err, req, res, next) => {
   const statusCode = err.status || HttpCodes.INTERNAL_SERVER_ERROR
 
