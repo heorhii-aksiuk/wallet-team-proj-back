@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Wallet end-point routes",
     "description": "Wallet web application",
     "license": {
@@ -89,7 +89,7 @@
     "/auth/login": {
       "post": {
         "tags": ["Auth"],
-        "summary": "User registration",
+        "summary": "User login",
         "parameters": [],
         "security": [{ "Bearer": [] }],
       
@@ -115,12 +115,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
-          },
-          "409": {
-            "description": "Provided email already exists",
+          "401": {
+            "description": "Invalid user, user not found!",
             "content": {}
           }
         }
@@ -146,18 +142,8 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (invalid request body)",
+          "204": {
+            "description": "No content",
             "content": {}
           }
         }
@@ -818,6 +804,31 @@
           }
         }
       }
+    },
+    "/current":{
+      "get": {
+        "tags": ["Current"],
+        "summary": "Current user",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+      
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid user, user not found!",
+            "content": {}
+          }
+        }
+      }
     }
   },
 
@@ -825,8 +836,13 @@
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": ["name", "email", "password", "repeatPassword"],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -836,12 +852,22 @@
             "type": "string",
             "description": "User's password",
             "example": "qwerty123"
+          },
+          "repeatPassword": {
+            "type": "string",
+            "description": "User's repeat password",
+            "example": "qwerty123"
           }
         }
       },
       "RegistrationResponse": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -873,15 +899,20 @@
       "LoginResponse": {
         "type": "object",
         "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
           "userId": {
             "type": "integer",
             "description": "User's id",
             "example": "zuidhgeui8128329ksjd"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
+          "token": {
+            "type": "integer",
+            "description": "User's id",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0ZjA1NzhlMDc1ZjFiMThlODA3NCIsImlhdCI6MTY1MzA1MjQwNSwiZXhwIjoxNjUzMDU5NjA1fQ.Nbtusa-2Y2GZyxtFW-RR-BkYx38dF2O7eUFBFqr_I3V"
           }
         }
       },
@@ -898,7 +929,7 @@
       },
       "LogoutResponse": {
         "type": "string",
-        "description": "User logout!"
+        "description": "No content"
       },
       "getStatisticsSuccessResponse": {
         "type": "object",
@@ -909,7 +940,7 @@
             "example": "success"
           },
           "code": {
-            "type": "integer",
+            "type": "integer", 
             "description": "HTTP code",
             "example": 200
           },
@@ -1794,6 +1825,21 @@
             "type": "string",
             "description": "Response message",
             "example": "Transaction was successfully deleted."
+          }
+        }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
           }
         }
       }
