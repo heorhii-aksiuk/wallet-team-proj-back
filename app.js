@@ -12,7 +12,7 @@ const { Limits } = require('./config/limits')
 const HttpCodes = require('./helpers/http-codes')
 const Ports = require('./helpers/ports')
 const authRouter = require('./router/auth-routes')
-
+const currentRouter = require('./router/user-routes')
 const categoriesRoutes = require('./router/categories-routes')
 const statisticsRoutes = require('./router/statistics-routes')
 const transactionsRoutes = require('./router/transactions-routes')
@@ -28,10 +28,11 @@ app.use(boolParser())
 app.use(cookieParser())
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use('/categories', categoriesRoutes);
-app.use('/statistics', statisticsRoutes);
-app.use('/transactions', transactionsRoutes);
 app.use('/auth', authRouter)
+app.use('/users', currentRouter)
+app.use('/categories', categoriesRoutes)
+app.use('/statistics', statisticsRoutes)
+app.use('/transactions', transactionsRoutes)
 
 app.use((req, res) => {
   res.status(HttpCodes.NOT_FOUND).json({
