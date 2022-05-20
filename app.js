@@ -6,7 +6,6 @@ const boolParser = require('express-query-boolean')
 const cookieParser = require('cookie-parser')
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger.json')
-
 const db = require('./db/mongo-db')
 const { Limits } = require('./config/limits')
 const HttpCodes = require('./helpers/http-codes')

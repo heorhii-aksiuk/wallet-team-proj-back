@@ -9,15 +9,18 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "servers": [
-    { 
+    {
       "url": "",
       "description": "Product service"
     },
-
-    { 
+    {
       "url": "http://localhost:3000",
       "description": "Development service"
     }
@@ -44,15 +47,19 @@
       "description": "Transactions endpoints"
     }
   ],
-
   "paths": {
     "/auth/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-          
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -88,11 +95,16 @@
     },
     "/auth/login": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "User login",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-      
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Login`s object",
           "required": true,
@@ -124,12 +136,16 @@
     },
     "/auth/logout": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "User logout",
-
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-          
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Logout`s object",
           "required": true,
@@ -151,7 +167,9 @@
     },
     "/statistics": {
       "get": {
-        "tags": ["Statistics"],
+        "tags": [
+          "Statistics"
+        ],
         "summary": "Getting statistic",
         "parameters": [
           {
@@ -173,7 +191,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -210,10 +232,16 @@
     },
     "/categories/hardcoded": {
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Getting hardcoded categories",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -240,10 +268,16 @@
     },
     "/categories": {
       "post": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Add a new category",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Add category",
           "required": true,
@@ -289,10 +323,16 @@
         }
       },
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "All categories",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -319,7 +359,9 @@
     },
     "/categories/{categoryId}": {
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Getting category by ID",
         "parameters": [
           {
@@ -333,7 +375,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -378,7 +424,9 @@
         }
       },
       "put": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Updating category by ID",
         "parameters": [
           {
@@ -392,7 +440,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Update category",
           "required": true,
@@ -448,7 +500,9 @@
         }
       },
       "delete": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Deleting category by ID",
         "parameters": [
           {
@@ -462,7 +516,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -509,10 +567,16 @@
     },
     "/transactions": {
       "post": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Creating a new transaction",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Create transaction",
           "required": true,
@@ -558,7 +622,9 @@
         }
       },
       "get": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Getting all transactions",
         "parameters": [
           {
@@ -580,7 +646,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -617,7 +687,9 @@
     },
     "/transactions/{transactionId}": {
       "get": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Getting transaction by ID",
         "parameters": [
           {
@@ -631,7 +703,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -676,7 +752,9 @@
         }
       },
       "put": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Updating transaction by ID",
         "parameters": [
           {
@@ -690,7 +768,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Update transaction",
           "required": true,
@@ -746,7 +828,9 @@
         }
       },
       "delete": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Deleting transaction by ID",
         "parameters": [
           {
@@ -760,7 +844,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -805,13 +893,18 @@
         }
       }
     },
-    "/current":{
+    "/current": {
       "get": {
-        "tags": ["Current"],
+        "tags": [
+          "Current"
+        ],
         "summary": "Current user",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-      
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -831,12 +924,16 @@
       }
     }
   },
-
   "components": {
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["name", "email", "password", "repeatPassword"],
+        "required": [
+          "name",
+          "email",
+          "password",
+          "repeatPassword"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -882,11 +979,14 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "type": "string",
-            "description": "User's email",  
+            "description": "User's email",
             "email": "user@gmail.com"
           },
           "password": {
@@ -918,7 +1018,9 @@
       },
       "LogoutRequest": {
         "type": "object",
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "userId": {
             "type": "integer",
@@ -940,7 +1042,7 @@
             "example": "success"
           },
           "code": {
-            "type": "integer", 
+            "type": "integer",
             "description": "HTTP code",
             "example": 200
           },
@@ -1217,7 +1319,10 @@
       },
       "createCategoryRequest": {
         "type": "object",
-        "required": ["name", "income"],
+        "required": [
+          "name",
+          "income"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -1452,7 +1557,12 @@
       },
       "createTransactionRequest": {
         "type": "object",
-        "required": ["date", "income", "category", "sum"],
+        "required": [
+          "date",
+          "income",
+          "category",
+          "sum"
+        ],
         "properties": {
           "date": {
             "type": "string",
@@ -1828,6 +1938,46 @@
           }
         }
       },
+      "unauthorizedErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "error"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 401
+          },
+          "message": {
+            "type": "string",
+            "description": "Unauthorized error message",
+            "example": "Not authorized."
+          }
+        }
+      },
+      "queryParamsErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Operation status",
+            "example": "error"
+          },
+          "code": {
+            "type": "integer",
+            "description": "HTTP code",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "description": "Joi validation error message",
+            "example": "'endDate' is required"
+          }
+        }
+      },
       "CurrentUserResponse": {
         "type": "object",
         "properties": {
@@ -1853,5 +2003,3 @@
     }
   }
 }
-  
-    

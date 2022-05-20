@@ -2,6 +2,7 @@ const HardCodedCategories = require('../helpers/categories');
 const Categories = require('../repositories/categories-repository');
 const HttpCodes = require('../helpers/http-codes');
 const Statuses = require('../helpers/statuses');
+const Messages = require("../helpers/messages");
 
 class CategoriesControllers {
   getHardCodedCategories(req, res, next) {
@@ -43,6 +44,7 @@ class CategoriesControllers {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
           code: HttpCodes.NOT_FOUND,
+          message: Messages.NOT_FOUND_CATEGORY
         });
       }
 
@@ -85,6 +87,7 @@ class CategoriesControllers {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
           code: HttpCodes.NOT_FOUND,
+          message: Messages.NOT_FOUND_CATEGORY
         });
       }
 
@@ -109,12 +112,14 @@ class CategoriesControllers {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
           code: HttpCodes.NOT_FOUND,
+          message: Messages.NOT_FOUND_CATEGORY
         });
       }
 
       return res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.OK,
+        message: Messages.DELETE_CATEGORY
       });
     } catch (error) {
       next(error);
