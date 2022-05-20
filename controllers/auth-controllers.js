@@ -4,7 +4,7 @@ const HttpCodes = require('../helpers/http-codes')
 const registration = async (req, res) => {
     const user = await authService.create(req.body)
     return res.status(HttpCodes.CREATED).json({ 
-        status: 'success',
+        status: 'Successful operation',
         code: HttpCodes.CREATED,
         data: { ...user }
 })
@@ -12,7 +12,7 @@ const registration = async (req, res) => {
 const login = async (req, res) => {
     const user = await authService.login(req.body)
     return res.status(HttpCodes.OK).json({ 
-        status: 'success', 
+        status: 'Successful operation', 
         code: HttpCodes.OK,
         user: { ...user } }) 
 }
