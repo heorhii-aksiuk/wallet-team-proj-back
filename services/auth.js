@@ -27,7 +27,7 @@ class authService {
     async login ({ email, password }) {
         const user = await this.getUser(email, password)
         if (!user) {
-            throw new CustomError (HttpCodes.UNAUTHORIZED, 'Invalid user')
+            throw new CustomError (HttpCodes.UNAUTHORIZED, 'Invalid user, user not found!')
         }
         const token = this.generateToken(user)
         await Users.updateToken(user.id, token)

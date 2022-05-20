@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Wallet end-point routes",
     "description": "Wallet web application",
     "license": {
@@ -9,15 +9,18 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "servers": [
-    { 
+    {
       "url": "",
       "description": "Product service"
     },
-
-    { 
+    {
       "url": "http://localhost:3000",
       "description": "Development service"
     }
@@ -44,15 +47,19 @@
       "description": "Transactions endpoints"
     }
   ],
-
   "paths": {
     "/auth/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-          
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -88,11 +95,16 @@
     },
     "/auth/login": {
       "post": {
-        "tags": ["Auth"],
-        "summary": "User registration",
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User login",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-      
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Login`s object",
           "required": true,
@@ -115,12 +127,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
-          },
-          "409": {
-            "description": "Provided email already exists",
+          "401": {
+            "description": "Invalid user, user not found!",
             "content": {}
           }
         }
@@ -128,12 +136,16 @@
     },
     "/auth/logout": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "User logout",
-
         "parameters": [],
-        "security": [{ "Bearer": [] }],
-          
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Logout`s object",
           "required": true,
@@ -146,18 +158,8 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LogoutResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (invalid request body)",
+          "204": {
+            "description": "No content",
             "content": {}
           }
         }
@@ -165,7 +167,9 @@
     },
     "/statistics": {
       "get": {
-        "tags": ["Statistics"],
+        "tags": [
+          "Statistics"
+        ],
         "summary": "Getting statistic",
         "parameters": [
           {
@@ -187,7 +191,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -224,10 +232,16 @@
     },
     "/categories/hardcoded": {
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Getting hardcoded categories",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -254,10 +268,16 @@
     },
     "/categories": {
       "post": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Add a new category",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Add category",
           "required": true,
@@ -303,10 +323,16 @@
         }
       },
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "All categories",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -333,7 +359,9 @@
     },
     "/categories/{categoryId}": {
       "get": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Getting category by ID",
         "parameters": [
           {
@@ -347,7 +375,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -392,7 +424,9 @@
         }
       },
       "put": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Updating category by ID",
         "parameters": [
           {
@@ -406,7 +440,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Update category",
           "required": true,
@@ -462,7 +500,9 @@
         }
       },
       "delete": {
-        "tags": ["Categories"],
+        "tags": [
+          "Categories"
+        ],
         "summary": "Deleting category by ID",
         "parameters": [
           {
@@ -476,7 +516,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -523,10 +567,16 @@
     },
     "/transactions": {
       "post": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Creating a new transaction",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Create transaction",
           "required": true,
@@ -572,7 +622,9 @@
         }
       },
       "get": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Getting all transactions",
         "parameters": [
           {
@@ -594,7 +646,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -631,7 +687,9 @@
     },
     "/transactions/{transactionId}": {
       "get": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Getting transaction by ID",
         "parameters": [
           {
@@ -645,7 +703,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -690,7 +752,9 @@
         }
       },
       "put": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Updating transaction by ID",
         "parameters": [
           {
@@ -704,7 +768,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Update transaction",
           "required": true,
@@ -760,7 +828,9 @@
         }
       },
       "delete": {
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "summary": "Deleting transaction by ID",
         "parameters": [
           {
@@ -774,7 +844,11 @@
             }
           }
         ],
-        "security": [{ "Bearer": [] }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success response",
@@ -818,15 +892,54 @@
           }
         }
       }
+    },
+    "/current": {
+      "get": {
+        "tags": [
+          "Current"
+        ],
+        "summary": "Current user",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid user, user not found!",
+            "content": {}
+          }
+        }
+      }
     }
   },
-
   "components": {
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "name",
+          "email",
+          "password",
+          "repeatPassword"
+        ],
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -836,12 +949,22 @@
             "type": "string",
             "description": "User's password",
             "example": "qwerty123"
+          },
+          "repeatPassword": {
+            "type": "string",
+            "description": "User's repeat password",
+            "example": "qwerty123"
           }
         }
       },
       "RegistrationResponse": {
         "type": "object",
         "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
           "email": {
             "type": "string",
             "description": "User's email",
@@ -856,11 +979,14 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "type": "string",
-            "description": "User's email",  
+            "description": "User's email",
             "email": "user@gmail.com"
           },
           "password": {
@@ -873,21 +999,28 @@
       "LoginResponse": {
         "type": "object",
         "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
           "userId": {
             "type": "integer",
             "description": "User's id",
             "example": "zuidhgeui8128329ksjd"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
+          "token": {
+            "type": "integer",
+            "description": "User's id",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODU0ZjA1NzhlMDc1ZjFiMThlODA3NCIsImlhdCI6MTY1MzA1MjQwNSwiZXhwIjoxNjUzMDU5NjA1fQ.Nbtusa-2Y2GZyxtFW-RR-BkYx38dF2O7eUFBFqr_I3V"
           }
         }
       },
       "LogoutRequest": {
         "type": "object",
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "userId": {
             "type": "integer",
@@ -898,7 +1031,7 @@
       },
       "LogoutResponse": {
         "type": "string",
-        "description": "User logout!"
+        "description": "No content"
       },
       "getStatisticsSuccessResponse": {
         "type": "object",
@@ -1186,7 +1319,10 @@
       },
       "createCategoryRequest": {
         "type": "object",
-        "required": ["name", "income"],
+        "required": [
+          "name",
+          "income"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -1421,7 +1557,12 @@
       },
       "createTransactionRequest": {
         "type": "object",
-        "required": ["date", "income", "category", "sum"],
+        "required": [
+          "date",
+          "income",
+          "category",
+          "sum"
+        ],
         "properties": {
           "date": {
             "type": "string",
@@ -1836,6 +1977,21 @@
             "example": "'endDate' is required"
           }
         }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Andrii"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -1847,5 +2003,3 @@
     }
   }
 }
-  
-    
