@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken')
-const Users = require ('../repositories/user-repository')
-const HttpCodes = require('../helpers/http-codes')
+const jwt = require('jsonwebtoken');
+const Users = require ('../repositories/user-repository');
+const HttpCodes = require('../helpers/http-codes');
+const Messages = require('../helpers/messages');
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY
 
@@ -11,7 +12,7 @@ const guard = async (req, res, next) => {
         return res.status(HttpCodes.UNAUTHORIZED). send({
             status: 'error',
             code: HttpCodes.UNAUTHORIZED,
-            message: 'Invalid token'
+            message: Messages.UNAUTHORIZED_USER_AUTH
         })
     }
 
@@ -21,7 +22,7 @@ const guard = async (req, res, next) => {
         return res.status(HttpCodes.UNAUTHORIZED). send({
             status: 'error',
             code: HttpCodes.UNAUTHORIZED,
-            message: 'Invalid token'
+            message: Messages.UNAUTHORIZED_USER_AUTH
         })
     }
 

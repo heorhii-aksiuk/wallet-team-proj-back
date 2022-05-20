@@ -1,6 +1,7 @@
 const Transactions = require('../repositories/transactions-repository');
 const HttpCodes = require('../helpers/http-codes');
 const Statuses = require('../helpers/statuses');
+const Messages = require("../helpers/messages");
 const calculateTotals = require('../helpers/total-calculator');
 
 class TransactionControllers {
@@ -42,7 +43,8 @@ class TransactionControllers {
       if (!transaction) {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
-          code: HttpCodes.NOT_FOUND
+          code: HttpCodes.NOT_FOUND,
+          message: Messages.NOT_FOUND_TRANSACTION
         });
       }
 
@@ -91,7 +93,8 @@ class TransactionControllers {
       if (!updatedTransaction) {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
-          code: HttpCodes.NOT_FOUND
+          code: HttpCodes.NOT_FOUND,
+          message: Messages.NOT_FOUND_TRANSACTION
         });
       }
 
@@ -118,13 +121,15 @@ class TransactionControllers {
       if (!deletedTransaction) {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
-          code: HttpCodes.NOT_FOUND
+          code: HttpCodes.NOT_FOUND,
+          message: Messages.NOT_FOUND_TRANSACTION
         });
       }
 
       return res.json({
         status: Statuses.SUCCESS,
-        code: HttpCodes.OK
+        code: HttpCodes.OK,
+        message: Messages.DELETE_TRANSACTION
       });
     } catch (error) {
       next(error);
