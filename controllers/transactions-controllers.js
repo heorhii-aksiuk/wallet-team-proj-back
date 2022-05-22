@@ -1,20 +1,20 @@
-const Transactions = require('../repositories/transactions-repository');
-const HttpCodes = require('../helpers/http-codes');
-const Statuses = require('../helpers/statuses');
+const Transactions = require("../repositories/transactions-repository");
+const HttpCodes = require("../helpers/http-codes");
+const Statuses = require("../helpers/statuses");
 const Messages = require("../helpers/messages");
-const calculateTotals = require('../helpers/total-calculator');
+const calculateTotals = require("../helpers/total-calculator");
 
 class TransactionControllers {
   async getTransactions(req, res, next) {
     try {
       const { id } = req.user;
-      const { startDate, endDate } = req.query;
+      // const { startDate, endDate } = req.query;
 
-      const transactions = await Transactions.getAllTransactionsWithinPeriod(
-        id,
-        startDate,
-        endDate
-      );
+      // const transactions = await Transactions.getAllTransactionsWithinPeriod(
+      //   id,
+      //   startDate,
+      //   endDate
+      // );
 
       const allTransactions = await Transactions.getAllTransactions(id);
 
@@ -23,7 +23,7 @@ class TransactionControllers {
       return res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.CREATED,
-        data: { transactions, totals },
+        data: { allTransactions, totals },
       });
     } catch (error) {
       next(error);
@@ -44,14 +44,14 @@ class TransactionControllers {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
           code: HttpCodes.NOT_FOUND,
-          message: Messages.NOT_FOUND_TRANSACTION
+          message: Messages.NOT_FOUND_TRANSACTION,
         });
       }
 
       return res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.OK,
-        data: { transaction }
+        data: { transaction },
       });
     } catch (error) {
       next(error);
@@ -71,7 +71,7 @@ class TransactionControllers {
       return res.status(HttpCodes.CREATED).json({
         status: Statuses.SUCCESS,
         code: HttpCodes.CREATED,
-        data: addedTransaction
+        data: addedTransaction,
       });
     } catch (error) {
       next(error);
@@ -94,14 +94,14 @@ class TransactionControllers {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
           code: HttpCodes.NOT_FOUND,
-          message: Messages.NOT_FOUND_TRANSACTION
+          message: Messages.NOT_FOUND_TRANSACTION,
         });
       }
 
       return res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.OK,
-        data: { transaction: updatedTransaction }
+        data: { transaction: updatedTransaction },
       });
     } catch (error) {
       next(error);
@@ -122,14 +122,14 @@ class TransactionControllers {
         return res.status(HttpCodes.NOT_FOUND).json({
           status: Statuses.ERROR,
           code: HttpCodes.NOT_FOUND,
-          message: Messages.NOT_FOUND_TRANSACTION
+          message: Messages.NOT_FOUND_TRANSACTION,
         });
       }
 
       return res.json({
         status: Statuses.SUCCESS,
         code: HttpCodes.OK,
-        message: Messages.DELETE_TRANSACTION
+        message: Messages.DELETE_TRANSACTION,
       });
     } catch (error) {
       next(error);
