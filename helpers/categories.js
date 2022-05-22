@@ -1,27 +1,32 @@
 const Categories = [
     {
-        name: 'Досуг',
+        name: 'Регулярный доход',
         income: true,
+        color: '#1b5e20',
+    },
+    {
+        name: 'Досуг',
+        income: false,
         color: '#fd9498',
     },
     {
         name: 'Другие расходы',
-        income: true,
+        income: false,
         color: '#ffd8d0',
     },
     {
         name: 'Забота о себе',
-        income: true,
+        income: false,
         color: '#81e1ff',
     },
     {
         name: 'Забота о детях',
-        income: true,
+        income: false,
         color: '#24cca7',
     },
     {
         name: 'Машина',
-        income: true,
+        income: false,
         color: '#6e78e8',
     },
     {
@@ -31,32 +36,27 @@ const Categories = [
     },
     {
         name: 'Образование',
-        income: true,
+        income: false,
         color: '#c5baff',
     },
     {
         name: 'Основные расходы',
-        income: true,
+        income: false,
         color: '#fed057',
     },
     {
         name: 'Продукты',
-        income: true,
+        income: false,
         color: '#4a56e2',
     },
     {
         name: 'Разное',
-        income: true,
+        income: false,
         color: '#b71c1c',
     },
     {
-        name: 'Регулярный доход',
-        income: true,
-        color: '#1b5e20',
-    },
-    {
         name: 'Товары для дома',
-        income: true,
+        income: false,
         color: '#00ad84',
     }
 ];
