@@ -17,11 +17,4 @@ const updateToken = async (id, token) => {
     return await User.findByIdAndUpdate(id, {token})
 }
 
-const findByPass = async (password) =>{
-    return await User.findOne({password})
-}
-const findByRepPass = async (repeatPassword) =>{
-    return await User.findOne({repeatPassword})
-}
-
-module.exports = {findById, findByEmail, create, updateToken, findByPass, findByRepPass}
+module.exports = {findById, findByEmail, create, updateToken}
