@@ -2,8 +2,8 @@ const Joi = require('joi').extend(require('@joi/date'));
 const HttpCodes = require('../helpers/http-codes');
 
 const getStatisticsSchema = Joi.object({
-  startDate: Joi.date().raw().format('DDMMYYYY').required(),
-  endDate: Joi.date().raw().format('DDMMYYYY').required(),
+  startDate: Joi.date().raw().format('DD.MM.YYYY').required(),
+  endDate: Joi.date().raw().format('DD.MM.YYYY').required(),
 });
 
 const validateRequestAgainstSchema = async (schema, request, next) => {
