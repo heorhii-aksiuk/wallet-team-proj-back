@@ -22,7 +22,12 @@ const transactionSchema = new Schema(
       enum: categoriesNames,
       default: 'Основные расходы'
     },
-    comment: { type: String, trim: true, default: '' },
+    comment: { 
+      type: String, 
+      trim: true,  
+      maxLength: 160, 
+      default: '' 
+    },
     sum: {
       type: Number,
       min: 0,
