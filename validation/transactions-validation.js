@@ -1,34 +1,35 @@
-const Joi = require('joi').extend(require('@joi/date'));
-const HttpCodes = require('../helpers/http-codes');
-const Categories = require('../helpers/categories');
+const Joi = require("joi").extend(require("@joi/date"));
+const HttpCodes = require("../helpers/http-codes");
+const Categories = require("../helpers/categories");
 
-const categoriesNames = Categories.map(category => category.name);
+const categoriesNames = Categories.map((category) => category.name);
 
 const createTransactionSchema = Joi.object({
-  date: Joi.date().raw().format('DD.MM.YYYY').required(),
+  date: Joi.date().raw().format("DD.MM.YYYY").required(),
   income: Joi.boolean().required(),
   category: Joi.string()
     .trim()
     .valid(...categoriesNames)
     .required(),
-  comment: Joi.string().optional().allow('').trim().max(160),
-  sum: Joi.number().min(0).required()
+  comment: Joi.string().optional().allow("").trim().max(160),
+  sum: Joi.number().min(0).required(),
+  balance: Joi.string().required(),
 });
 
 const updateTransactionSchema = Joi.object({
-  date: Joi.date().raw().format('DD.MM.YYYY').optional(),
+  date: Joi.date().raw().format("DD.MM.YYYY").optional(),
   income: Joi.boolean().optional(),
   category: Joi.string()
     .trim()
     .valid(...categoriesNames)
     .optional(),
   comment: Joi.string().trim().max(150).optional(),
-  sum: Joi.number().min(0).optional()
-}).or('date', 'income', 'category', 'comment', 'sum');
+  sum: Joi.number().min(0).optional(),
+}).or("date", "income", "category", "comment", "sum");
 
 const paginateTransactionSchema = Joi.object({
   limit: Joi.number().min(0).optional(),
-  offset: Joi.number().min(0).optional()
+  offset: Joi.number().min(0).optional(),
 });
 
 const validateRequestAgainstSchema = async (schema, request, next) => {
@@ -38,7 +39,7 @@ const validateRequestAgainstSchema = async (schema, request, next) => {
   } catch (error) {
     next({
       status: HttpCodes.BAD_REQUEST,
-      message: error.message
+      message: error.message,
     });
   }
 };
@@ -64,5 +65,5 @@ module.exports = {
       req.query,
       next
     );
-  }
+  },
 };
