@@ -5,7 +5,7 @@ const Categories = require('../helpers/categories');
 const categoriesNames = Categories.map(category => category.name);
 
 const createTransactionSchema = Joi.object({
-  date: Joi.date().raw().format('DDMMYYYY').required(),
+  date: Joi.date().raw().format('DD.MM.YYYY').required(),
   income: Joi.boolean().required(),
   category: Joi.string()
     .trim()
@@ -16,7 +16,7 @@ const createTransactionSchema = Joi.object({
 });
 
 const updateTransactionSchema = Joi.object({
-  date: Joi.date().raw().format('DDMMYYYY').optional(),
+  date: Joi.date().raw().format('DD.MM.YYYY').optional(),
   income: Joi.boolean().optional(),
   category: Joi.string()
     .trim()
