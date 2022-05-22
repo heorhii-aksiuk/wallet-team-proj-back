@@ -7,7 +7,7 @@ const categoriesNames = Categories.map((category) => category.name);
 const transactionSchema = new Schema(
   {
     date: {
-      type: String,
+      type: Date,
       required: [true, "Date is required."],
     },
     income: {

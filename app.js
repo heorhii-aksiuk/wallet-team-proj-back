@@ -1,15 +1,19 @@
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const helmet = require('helmet')
-const boolParser = require('express-query-boolean')
-const cookieParser = require('cookie-parser')
-const swaggerUi = require('swagger-ui-express')
-const swaggerDocument = require('./swagger.json')
-const db = require('./db/mongo-db')
-const { Limits } = require('./config/limits')
-const HttpCodes = require('./helpers/http-codes')
-const Ports = require('./helpers/ports')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const boolParser = require('express-query-boolean');
+const cookieParser = require('cookie-parser');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+const db = require('./db/mongo-db');
+const { Limits } = require('./config/limits');
+const HttpCodes = require('./helpers/http-codes');
+const Ports = require('./helpers/ports');
+const Statuses = require('./helpers/statuses');
+const Messages = require('./helpers/messages');
+
 const authRouter = require('./router/auth-routes')
 const currentRouter = require('./router/user-routes')
 const categoriesRoutes = require('./router/categories-routes')
@@ -35,9 +39,9 @@ app.use('/transactions', transactionsRoutes)
 
 app.use((req, res) => {
   res.status(HttpCodes.NOT_FOUND).json({
-    status: 'error',
+    status: Statuses.ERROR,
     code: HttpCodes.NOT_FOUND,
-    message: 'Not Found.',
+    message: Messages.NOT_FOUND
   })
 })
 
