@@ -931,8 +931,7 @@
         "required": [
           "name",
           "email",
-          "password",
-          "repeatPassword"
+          "password"
         ],
         "properties": {
           "name": {
@@ -948,11 +947,6 @@
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "qwerty123"
-          },
-          "repeatPassword": {
-            "type": "string",
-            "description": "User's repeat password",
             "example": "qwerty123"
           }
         }
