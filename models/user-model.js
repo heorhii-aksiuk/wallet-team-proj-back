@@ -14,10 +14,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required'],
     },
-    repeatPassword: {
-      type: String,
-      required: [true, 'Password must be repeat'],
-    },
     email: {
       type: String,
       required: [true, 'Email is required'],
@@ -25,17 +21,12 @@ const userSchema = new Schema(
       validate(value) {
         const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
         return re.test(String(value).toLowerCase())
-      },
-      
+      }
     },
     token: {
       type: String,
       default: null,
-    },
-    cloudId: {
-      type: String,
-      default: null,
-    },
+    }
   },
   {
     versionKey: false,
