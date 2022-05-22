@@ -5,18 +5,18 @@ const Categories = require('../helpers/categories');
 const categoriesNames = Categories.map(category => category.name);
 
 const createTransactionSchema = Joi.object({
-  date: Joi.date().raw().format('YYYY-MM-DD').required(),
+  date: Joi.date().raw().format('DDMMYYYY').required(),
   income: Joi.boolean().required(),
   category: Joi.string()
     .trim()
     .valid(...categoriesNames)
     .required(),
-  comment: Joi.string().trim().max(150).optional(),
+  comment: Joi.string().optional().allow('').trim().max(160),
   sum: Joi.number().min(0).required()
 });
 
 const updateTransactionSchema = Joi.object({
-  date: Joi.date().raw().format('YYYY-MM-DD').optional(),
+  date: Joi.date().raw().format('DDMMYYYY').optional(),
   income: Joi.boolean().optional(),
   category: Joi.string()
     .trim()
