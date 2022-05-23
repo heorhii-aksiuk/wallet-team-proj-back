@@ -11,7 +11,7 @@ const createTransactionSchema = Joi.object({
     .trim()
     .valid(...categoriesNames)
     .required(),
-  comment: Joi.string().optional().allow("").trim().max(160),
+  comment: Joi.string().optional().allow("").trim().max(50),
   sum: Joi.number().min(0).required(),
   balance: Joi.string().required(),
 });
@@ -23,8 +23,9 @@ const updateTransactionSchema = Joi.object({
     .trim()
     .valid(...categoriesNames)
     .optional(),
-  comment: Joi.string().trim().max(150).optional(),
+  comment: Joi.string().trim().max(50).optional(),
   sum: Joi.number().min(0).optional(),
+  balance: Joi.string().optional(),
 }).or("date", "income", "category", "comment", "sum");
 
 const paginateTransactionSchema = Joi.object({

@@ -1,7 +1,11 @@
 const Categories = require('./categories');
 
 const calculateStatistics = transactions => {
-    const result = transactions.reduce((statistics, transaction) => {
+    const expenceTransactions = transactions.filter(
+        (transaction) => transaction.income === false
+    );
+
+    const result = expenceTransactions.reduce((statistics, transaction) => {
         const category = transaction.category;
         const categoryCount = statistics[category]
             ? {
