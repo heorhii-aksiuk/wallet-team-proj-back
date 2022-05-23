@@ -25,7 +25,7 @@ const transactionSchema = new Schema(
     comment: {
       type: String,
       trim: true,
-      maxLength: 160,
+      maxLength: 50,
       default: "",
     },
     sum: {
