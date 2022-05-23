@@ -1,41 +1,45 @@
-const { Schema, model } = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
-const Categories = require('../helpers/categories');
+const { Schema, model } = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
+const Categories = require("../helpers/categories");
 
-const categoriesNames = Categories.map(category => category.name);
+const categoriesNames = Categories.map((category) => category.name);
 
 const transactionSchema = new Schema(
   {
     date: {
       type: Date,
-      required: [true, 'Date is required.']
+      required: [true, "Date is required."],
     },
     income: {
       type: Boolean,
-      required: [true, 'Income type is required.'],
-      default: false
+      required: [true, "Income type is required."],
+      default: false,
     },
     category: {
       type: String,
       trim: true,
-      required: [true, 'Category is required.'],
+      required: [true, "Category is required."],
       enum: categoriesNames,
-      default: 'Основные расходы'
+      default: "Основные расходы",
     },
-    comment: { 
-      type: String, 
-      trim: true,  
-      maxLength: 160, 
-      default: '' 
+    comment: {
+      type: String,
+      trim: true,
+      maxLength: 160,
+      default: "",
     },
     sum: {
       type: Number,
       min: 0,
-      required: [true, 'Sum is required.']
+      required: [true, "Sum is required."],
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'user'
+      ref: "user",
+    },
+    balance: {
+      type: String,
+      required: [true, "Balance is required."],
     },
   },
   {
@@ -46,13 +50,13 @@ const transactionSchema = new Schema(
       transform: function (doc, ret) {
         delete ret._id;
         return ret;
-      }
-    }
+      },
+    },
   }
 );
 
 transactionSchema.plugin(mongoosePaginate);
 
-const Transaction = model('transaction', transactionSchema);
+const Transaction = model("transaction", transactionSchema);
 
 module.exports = Transaction;
