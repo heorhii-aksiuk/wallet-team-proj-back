@@ -11,7 +11,7 @@ const calculateStatistics = transactions => {
             }
             : {
             category: transaction.category,
-            income: transaction.income,
+            income: transaction.income.false,
             sum: transaction.sum,
             color: Categories.find(element => element.name === category).color,
             };
